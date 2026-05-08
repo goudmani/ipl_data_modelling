@@ -1,0 +1,21 @@
+# Core
+pandas
+numpy
+
+# Visualisation
+matplotlib
+seaborn
+
+# Modelling
+scikit-learn
+
+# Notebooks
+jupyter
+ipykernel
+
+# Scraping
+playwright
+
+# Utilities
+pyyaml
+python-dotenv
