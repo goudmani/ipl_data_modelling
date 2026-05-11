@@ -21,6 +21,7 @@ import asyncio
 import re
 import pandas as pd
 from playwright.async_api import async_playwright, TimeoutError as PwTimeout
+import os
 
 # ── Config ────────────────────────────────────────────────────────────────────
 # Auctions were not held every year (2009 mini, 2010 mini, etc.)
@@ -249,7 +250,11 @@ async def main():
     final["base_price_cr"] = pd.to_numeric(final["base_price_cr"], errors="coerce")
     final["sold_price_cr"] = pd.to_numeric(final["sold_price_cr"], errors="coerce")
 
-    out = "ipl_auction_data.csv"
+    output_dir = "/Workspace/Users/manikanthgoud98@gmail.com/ipl_data_modelling/data/raw"
+    os.makedirs(output_dir, exist_ok=True)
+
+    output_path = os.path.join(output_dir,"ipl_auction_data.csv")
+
     final.to_csv(out, index=False)
     print(f"\n✅ Saved {len(final)} rows → {out}")
     print(final.head(10).to_string())

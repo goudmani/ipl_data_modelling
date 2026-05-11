@@ -157,12 +157,28 @@ async def main():
         return
 
     df = pd.DataFrame(all_records)
+<<<<<<< Updated upstream
     
     output_dir = "data/raw"
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "ipl_team_stats.csv")
     df.to_csv(output_path, index=False)
     print(f"\n✅ Successfully saved {len(df)} rows to {output_path}")
+=======
+    df["team"] = df["team"].str.strip().str.upper()
+    for col in ["matches", "won", "lost", "no_result", "points"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    df["nrr"] = pd.to_numeric(df["nrr"], errors="coerce")
+
+    # Create data/raw directory if it doesn't exist
+    output_dir = "/Workspace/Users/manikanthgoud98@gmail.com/ipl_data_modelling/data/raw"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    output_path = os.path.join(output_dir, "ipl_team_stats.csv")
+    df.to_csv(output_path, index=False)
+    print(f"\n✅ Saved {len(df)} rows → {output_path}")
+    print(df.head(10).to_string())
+>>>>>>> Stashed changes
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    await main()
